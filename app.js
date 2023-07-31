@@ -23,7 +23,21 @@ const main = async () => {
 
     const nftContract = new Contract(contractAddress, contractABI, signer)
 
-    const receipt = await nftContract.mint(address)
+    // const receipt = await nftContract.mint(address)
+
+    // Use this to mint two NFTs at a time
+    const receipt = await signer.execBatch([
+        {
+            to: nftContract.address,
+            data: nftContract.interface.encodeFunctionData("mint", [address]),
+        },
+        {
+            to: nftContract.address,
+            data: nftContract.interface.encodeFunctionData("mint", [address]),
+        },
+    ])
+
+
     await receipt.wait()
     console.log(`NFT balance: ${await nftContract.balanceOf(address)}`)
 }
