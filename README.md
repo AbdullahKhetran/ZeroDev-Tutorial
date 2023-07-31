@@ -12,6 +12,7 @@ npm i
 ### env file
 
 Create .env file
+
 Add your variables in the file like this
 ```
 PROJECT_ID=YOUR-PROJECT-ID
